@@ -72,21 +72,22 @@ function countdown(ms) {
 
   function updateTimer() {
     const { days, hours, minutes, seconds } = convertMs(ms);
-
-    timerFields.days.textContent = addLeadingZero(days);
-    timerFields.hours.textContent = addLeadingZero(hours);
-    timerFields.minutes.textContent = addLeadingZero(minutes);
-    timerFields.seconds.textContent = addLeadingZero(seconds);
-
-    if (ms <= -1000) {
+  
+    timerFields.days.textContent = addLeadingZero(Math.max(days, 0));
+    timerFields.hours.textContent = addLeadingZero(Math.max(hours, 0));
+    timerFields.minutes.textContent = addLeadingZero(Math.max(minutes, 0));
+    timerFields.seconds.textContent = addLeadingZero(Math.max(seconds, 0));
+  
+    if (ms <= 0) {
       clearInterval(interval);
-      // Робимо кнопку та інпут знову активними
-      startButton.removeAttribute("disabled");
+      // Зробити інпут знову активним
       datetimePicker.removeAttribute("disabled");
+      // Зробити кнопку "Start" знову активною
+      startButton.removeAttribute("disabled");
     } else {
       ms -= 1000;
     }
-  }
+  }  
 
   const interval = setInterval(updateTimer, 1000);
 }
