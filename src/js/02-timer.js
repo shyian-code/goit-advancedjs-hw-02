@@ -45,15 +45,16 @@ function startCountdown() {
       title: "Error",
       message: "Please choose a date in the future",
     });
-    // Деактивація кнопки "Start"
+    // Деактивувати кнопку "Start"
     startButton.setAttribute("disabled", true);
-    // Деактивація інпут
+    // Деактивувати інпут
     datetimePicker.setAttribute("disabled", true);
     return;
   }
 
-  // Деактивація інпута після вибору дати
+  // Деактивувати інпут та кнопку "Start" після вибору дати та натискання на кнопку "Start"
   datetimePicker.setAttribute("disabled", true);
+  startButton.setAttribute("disabled", true);
 
   const timeRemaining = selectedDate - new Date();
 
