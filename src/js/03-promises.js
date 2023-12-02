@@ -1,8 +1,6 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-
-
 document.querySelector(".form").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -23,6 +21,11 @@ document.querySelector(".form").addEventListener("submit", function (e) {
   }
 
   createPromises({ delay, step, amount });
+
+  // Очистищаємо значення усіх інпутів після відправки форми
+  delayInput.value = "";
+  stepInput.value = "";
+  amountInput.value = "";
 });
 
 function createPromise(position, delay) {
