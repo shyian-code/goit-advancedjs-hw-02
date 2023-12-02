@@ -25,6 +25,9 @@ img {
 
 .button-switcher {
   padding: 12px 36px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .timer-interface {
