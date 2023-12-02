@@ -39,10 +39,27 @@ startButton.addEventListener("click", startCountdown);
 function startCountdown() {
   const selectedDate = datetimePicker._flatpickr.selectedDates[0];
 
+  if (!selectedDate || selectedDate <= new Date()) {
+    // Показати повідомлення про помилку
+    iziToast.error({
+      title: "Error",
+      message: "Please choose a date in the future",
+    });
+    // Деактивація кнопки "Start"
+    startButton.setAttribute("disabled", true);
+    // Деактивація інпут
+    datetimePicker.setAttribute("disabled", true);
+    return;
+  }
+
+  // Деактивація інпута після вибору дати
+  datetimePicker.setAttribute("disabled", true);
+
   const timeRemaining = selectedDate - new Date();
 
   countdown(timeRemaining);
 }
+
 
 function countdown(ms) {
   const timerFields = {
@@ -60,8 +77,11 @@ function countdown(ms) {
     timerFields.minutes.textContent = addLeadingZero(minutes);
     timerFields.seconds.textContent = addLeadingZero(seconds);
 
-    if (ms <= 0) {
+    if (ms <= -1000) {
       clearInterval(interval);
+      // Робимо кнопку та інпут знову активними
+      startButton.removeAttribute("disabled");
+      datetimePicker.removeAttribute("disabled");
     } else {
       ms -= 1000;
     }
